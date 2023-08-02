@@ -1,11 +1,5 @@
-import PropTypes from "prop-types";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import PropTypes from 'prop-types';
+import React, { createContext, useCallback, useContext, useEffect, useState, useMemo } from "react";
 
 const DataContext = createContext({});
 
@@ -21,24 +15,22 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
+      const loadedData = await api.loadData();
+      setData(loadedData);
     } catch (err) {
       setError(err);
     }
   }, []);
+  
   useEffect(() => {
     if (data) return;
     getData();
-  });
+  }, [data, getData]);
   
+  const value = useMemo(() => ({ data, error }), [data, error]);
+
   return (
-    <DataContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        data,
-        error,
-      }}
-    >
+    <DataContext.Provider value={value}>
       {children}
     </DataContext.Provider>
   );

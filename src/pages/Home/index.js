@@ -13,7 +13,10 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const {data} = useData()
+  const last = data ? data.events[data.events.length - 1] : null;
+
+  
   return <>
     <header>
       <Menu />
@@ -22,7 +25,7 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer">
+      <section id="nos-services" className="ServicesContainer">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -51,14 +54,14 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer">
+      <section id="nos-realisations" className="EventsContainer">
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
       <section className="PeoplesContainer">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
-        <div className="ListContainer">
+        <div id="notre-equipe" className="ListContainer">
           <PeopleCard
             imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
             name="Samira"
@@ -110,6 +113,7 @@ const Page = () => {
               onError={() => null}
             />
           )}
+          
         </Modal>
       </div>
     </main>
@@ -121,7 +125,7 @@ const Page = () => {
           title={last?.title}
           date={new Date(last?.date)}
           small
-          label="boom"
+          label={last?.type}
         />
       </div>
       <div className="col contact">

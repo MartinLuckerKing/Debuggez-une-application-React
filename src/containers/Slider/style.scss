@@ -1,4 +1,6 @@
-@import "src/colors.scss";
+@import "./../../colors.scss";
+
+
 
 .SlideCardList {
   position: relative;
@@ -32,7 +34,9 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      
       input {
+        opacity: 1;
         width: 16px;
         height: 16px;
         min-width: 0;

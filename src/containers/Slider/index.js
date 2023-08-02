@@ -42,15 +42,19 @@ const Slider = () => {
     </div>
     <div className="SlideCard__paginationContainer">
       <div className="SlideCard__pagination">
-        {byDateDesc.map((_, radioIdx) => (
-          <input
-          // eslint-disable-next-line react/no-array-index-key
-            key={`${radioIdx}`}
-            type="radio"
-            name="radio-button"
-            readOnly={idx === radioIdx}
-          />
-        ))}
+      {byDateDesc.map((_, radioIdx) => (
+        
+        <input
+        // eslint-disable-next-line react/no-array-index-key
+          key={`${radioIdx}`}
+          className="SlideCard__pagination__color"
+          type="radio"
+          name="radio-button"
+          value={radioIdx}
+          checked={index === radioIdx}
+          readOnly
+        />
+      ))}
       </div>
     </div>
   </div>
